@@ -10,6 +10,13 @@ route:
       receiver: pager
       repeat_interval: 1h
 
+inhibit_rules:
+  - source_matchers:
+      - alertname="TargetDown"
+      - job="payments"
+    target_matchers:
+      - alertname=~"Checkout.*|HighErrorRatio"
+
 receivers:
   - name: pager
     webhook_configs:
